@@ -1,0 +1,20 @@
+<div class="portfolio-list-container">
+  <h2>Your Investments</h2>
+
+  <div *ngIf="portfolios$ | async as portfolios">
+    <div *ngIf="portfolios.length; else noData">
+      <div class="portfolio-card" *ngFor="let p of portfolios">
+        <h4>{{ p.assetType }}</h4>
+        <p>Quantity: {{ p.quantity }}</p>
+        <p>Price: {{ p.purchasePrice | customCurrency }}</p>
+        <p>Date: {{ p.purchaseDate }}</p>
+        <button (click)="deletePortfolio(p.id)">Delete</button>
+      </div>
+    </div>
+    <ng-template #noData>
+      <p>No investments found.</p>
+    </ng-template>
+  </div>
+
+  <a routerLink="/portfolio/add" class="add-link">+ Add New Investment</a>
+</div>
